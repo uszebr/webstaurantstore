@@ -8,8 +8,8 @@
 
         <classes>
             <class name="com.webstaurantstore.tests.SearchAddEmptyCardTest">
+                <!--<methods><include name="firstTest"/></methods>-->
                 <methods><include name="firstTest"/></methods>
-               <!-- <methods><include name="debug"/></methods>-->
             </class>
 
 

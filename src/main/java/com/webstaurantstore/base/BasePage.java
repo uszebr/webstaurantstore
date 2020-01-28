@@ -55,6 +55,7 @@ public class BasePage {
 
     }
 
+
     protected void waitToUnvisibilityOfElement(By element, Integer... seconds) {
         int attempts = 3;// to attempts to check visibility of the element;
         while (attempts > 0) {
@@ -73,12 +74,9 @@ public class BasePage {
     }
 
     protected void waitFor(ExpectedCondition<WebElement> condition, Integer... timeout) { // wait for certain condition withIn timeout time
-
         // if no parameter, using default timeout from Constans
-
         WebDriverWait wait = new WebDriverWait(this.driver, (timeout.length > 0 ? timeout[0] : DEFAULT_TIMEOUT));
         wait.until(condition);
-
     }
 
     public String getPageTitle() {

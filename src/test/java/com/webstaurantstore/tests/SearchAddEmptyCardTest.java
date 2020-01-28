@@ -3,6 +3,7 @@ package com.webstaurantstore.tests;
 import com.webstaurantstore.basetest.BaseTest;
 import com.webstaurantstore.pages.CartPage;
 import com.webstaurantstore.pages.HomePage;
+import com.webstaurantstore.pages.ProductPage;
 import com.webstaurantstore.pages.SearchResultPage;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -22,9 +23,12 @@ public class SearchAddEmptyCardTest extends BaseTest {
         //may be add wait for visibility of H1 class="page-header search--title"
         // System.out.println( searchResultPage.checkProductTitlesOnCurrentSearchPage("stainless work table","table"));
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(searchResultPage.checkProductTitlesOnALLSearchPages("stainless work table", "table"));
+        softAssert.assertTrue(searchResultPage.checkProductTitlesOnALLSearchPages("table"));
 
-        searchResultPage.addToCartLastProductOnCurrentPage();
+        ProductPage productPage = searchResultPage.goLastProductOnCurrentPage();
+        productPage.waitProductPageToLoad();
+
+        productPage.addToCartButtonClick();
 
 
         CartPage cartPage = new CartPage(this.driver);
@@ -44,33 +48,33 @@ public class SearchAddEmptyCardTest extends BaseTest {
 
     @Test(groups = {"debug", "NoExecute"})
     public void debugTest() {
-
-       /* HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(driver);
         homePage.openHomePage();
         homePage.fillUpSearchTextBox("stainless work table");
         SearchResultPage searchResultPage = homePage.clickSearchButton();
-*/
+
 
         //may be add wait for visibility of H1 class="page-header search--title"
         // System.out.println( searchResultPage.checkProductTitlesOnCurrentSearchPage("stainless work table","table"));
-      /*  SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(searchResultPage.checkProductTitlesOnALLSearchPages("stainless work table","table"));
-        pause(2);
-        searchResultPage.addToCartLastProductOnCurrentPage();*/
-       /* searchResultPage.addToCartLastProductOnCurrentPage();
-        pause(2);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(searchResultPage.checkProductTitlesOnALLSearchPages("table"));
+
+        ProductPage productPage = searchResultPage.goLastProductOnCurrentPage();
+        productPage.addToCartButtonClick();
+
+
         CartPage cartPage = new CartPage(this.driver);
         cartPage.openCartPage();
-        pause(2);
-        System.out.println("is cart empty?" + cartPage.checkCartIsEmpty());
-        cartPage.emptyCartButtonClick();
-        pause(2);
-        cartPage.emtyCartConfirmButtonClick();
-        pause(2);
-        System.out.println("is cart empty?" + cartPage.checkCartIsEmpty());
-*/
 
-        // softAssert.assertAll();
+        softAssert.assertFalse(cartPage.checkCartIsEmpty());//one product should be in the cart
+        cartPage.emptyCartButtonClick();
+
+        cartPage.emtyCartConfirmButtonClick();
+
+        softAssert.assertTrue(cartPage.checkCartIsEmpty());// cart should be empty
+
+
+        softAssert.assertAll();
     }
 
 }
