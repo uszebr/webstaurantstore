@@ -79,7 +79,7 @@ public class SearchResultPage extends BasePage {
                 resultAllPages = false;
                 System.out.println("!!!Found Not matching products on page number: " + pageNumber);
             }
-            
+
 
         } while (nextPageSearchResults());//loop to the next page until False to load next page;
         return resultAllPages;
