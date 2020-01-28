@@ -62,6 +62,7 @@ public class SearchResultPage extends BasePage {
             list.get(0).click();
             this.pageNumber++;// adding page number
             System.out.println("Clicked to the next page! Current Page is: " + this.pageNumber);
+            BasePage.pause(1);
             return true;
         } else {
             return false;
