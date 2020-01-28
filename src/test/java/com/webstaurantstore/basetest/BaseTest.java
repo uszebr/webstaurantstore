@@ -1,6 +1,6 @@
 package com.webstaurantstore.basetest;
 
-import org.apache.commons.io.FileUtils;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -46,7 +46,7 @@ public class BaseTest {
         public void tearDown() {
 
             if (driver != null) {
-              //  driver.quit(); // commented to test
+               driver.quit(); // commented to  debug
             }
             System.out.println("==After==");
 

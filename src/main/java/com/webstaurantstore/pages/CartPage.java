@@ -24,6 +24,7 @@ public class CartPage extends BasePage {
 
     public void emptyCartButtonClick(){
         System.out.println("Clicking EMPTY Cart Button..");
+        BasePage.pause(1);
         click(emptyCartButton);
     }
 
