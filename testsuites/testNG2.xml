@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Tampa2"  parallel="tests" thread-count="1" >
+
+    <test name="TestOne-SuiteTWO" >
+        <parameter name="browser" value="chrome"></parameter>
+
+
+        <classes>
+            <class name="com.webstaurantstore.tests.SearchAddEmptyCardTest">
+                <!--<methods><include name="firstTest"/></methods>-->
+                <methods>
+                    <include name="positiveTest"/>
+                    <exclude name="firstTest"/>
+                    <exclude name="debugTest"/>
+                </methods>
+
+            </class>
+
+
+        </classes>
+    </test>
+
+
+
+
+
+
+</suite>

@@ -8,9 +8,12 @@
     <artifactId>TampaTest</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+       <!-- <defaultSuiteFiles>testsuites/testNG.xml</defaultSuiteFiles>-->
+        <suiteXmlFile>testsuites/testNG.xml</suiteXmlFile>
+    </properties>
+
     <dependencies>
-
-
 
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io for FileUtils-->
         <dependency>
@@ -41,11 +44,7 @@
 
 
 
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.14.3</version>
-        </dependency>
+      
 
 
     </dependencies>
@@ -70,8 +69,9 @@
                 <version>2.22.0</version>
                 <configuration>
                     <suiteXmlFiles> <!--ADDING to configuration link to xml testNg so it can run tests as described in testng.xml even from command prompt !!! Full PATH!!!-->
-                        <suiteXmlFile>C:\Users\viktor\IdeaProjects\TampaTest\testsuites\testNG.xml
-                        </suiteXmlFile>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                      <!-- to run different suites use param(can be used for .bat Jenkins): mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testXml1.xml-->
+                     <!--   <suiteXmlFile>C:\Users\viktor\IdeaProjects\TampaTest\testsuites\testNG.xml</suiteXmlFile>-->
                     </suiteXmlFiles>
                     <argLine>
                         --illegal-access=permit

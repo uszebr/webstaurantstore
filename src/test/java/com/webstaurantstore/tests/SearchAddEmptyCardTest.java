@@ -5,6 +5,7 @@ import com.webstaurantstore.pages.CartPage;
 import com.webstaurantstore.pages.HomePage;
 import com.webstaurantstore.pages.ProductPage;
 import com.webstaurantstore.pages.SearchResultPage;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -43,6 +44,11 @@ public class SearchAddEmptyCardTest extends BaseTest {
 
 
         softAssert.assertAll();
+    }
+    @Test(groups = {"debug", "NoExecute"})
+    public void positiveTest() {
+        System.out.println("==Just 100% positive test==");
+        Assert.assertTrue(true);
     }
 
 

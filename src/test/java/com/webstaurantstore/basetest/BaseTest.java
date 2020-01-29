@@ -6,14 +6,11 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.io.File;
 
-public class BaseTest {
+abstract public class BaseTest {
 
 
     /////////////
@@ -33,7 +30,7 @@ public class BaseTest {
 
         @Parameters({"browser"})
         @BeforeMethod(alwaysRun = true)
-        public void setUpMethod(String browser) {
+        public void setUpMethod(@Optional("chrome") String browser) {
             System.out.println("==Before==");
 
 

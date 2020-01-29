@@ -7,15 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
 import static com.webstaurantstore.base.Constants.*;///ALL CONTSTANTS are stored here...
 
-public class BasePage {
+abstract public class BasePage {
     // public static final By LOGO = By.xpath("");
 
 
@@ -56,7 +52,7 @@ public class BasePage {
     }
 
 
-    protected void waitToUnvisibilityOfElement(By element, Integer... seconds) {
+    protected void waitToUnvisibilityOfElement(By element) {
         int attempts = 3;// to attempts to check visibility of the element;
         while (attempts > 0) {
             try {
