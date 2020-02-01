@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Tampa3"  parallel="tests" thread-count="1" >
+    <listeners>
+        <listener class-name="com.webstaurantstore.basetest.TestListener"></listener>
+    </listeners>
+
+    <test name="TestOne-SuiteTWO" >
+     <!--   <parameter name="browser" value="chrome"></parameter>-->
+
+
+        <classes>
+            <class name="com.webstaurantstore.tests.SearchAddEmptyCardTest">
+                <!--<methods><include name="firstTest"/></methods>-->
+                <methods>
+                    <include name="positiveTest"/>
+                    <exclude name="firstTest"/>
+                    <exclude name="debugTest"/>
+                </methods>
+
+            </class>
+
+
+        </classes>
+    </test>
+
+
+
+
+
+
+</suite>

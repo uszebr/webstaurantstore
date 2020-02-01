@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import org.apache.logging.log4j.Logger;
+
 import static com.webstaurantstore.base.Constants.*;///ALL CONTSTANTS are stored here...
 
 abstract public class BasePage {
@@ -16,10 +18,12 @@ abstract public class BasePage {
 
 
     protected WebDriver driver;
+    protected Logger log;
 
 
-    protected BasePage(WebDriver driver) {
+    protected BasePage(WebDriver driver, Logger log) {
         this.driver = driver;
+        this.log = log;
 
 
     }
@@ -87,11 +91,11 @@ abstract public class BasePage {
         return driver.findElement(by);
     }
 
-    public static void pause(int timeInSeconds) {
+    public  void pause(int timeInSeconds) {
         try {
             Thread.sleep(timeInSeconds * 1000);
         } catch (InterruptedException e) {
-            System.out.println("Exception. Can not wait for:" + timeInSeconds);
+            log.info("Exception. Can not wait for:" + timeInSeconds);
         }
     }
 

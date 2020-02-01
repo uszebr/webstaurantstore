@@ -1,10 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Tampa"  parallel="tests" thread-count="1" >
-
     <test name="TestOne" >
         <parameter name="browser" value="chrome"></parameter>
-
+        <parameter name="environment" value="local"></parameter>
+      <!--  <parameter name="environment" value="grid"></parameter> this is for test in SeleniumGrid-->
 
         <classes>
             <class name="com.webstaurantstore.tests.SearchAddEmptyCardTest">
@@ -15,6 +15,9 @@
 
         </classes>
     </test>
+
+    <parameter name="environment" value="grid"></parameter>
+
 
 
 

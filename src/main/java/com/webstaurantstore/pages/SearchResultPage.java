@@ -1,6 +1,8 @@
 package com.webstaurantstore.pages;
 
 import com.webstaurantstore.base.BasePage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,8 +24,8 @@ public class SearchResultPage extends BasePage {
 
 
 
-    public SearchResultPage(WebDriver driver) {
-        super(driver);
+    public SearchResultPage(WebDriver driver, Logger log) {
+        super(driver, log);
         this.pageNumber = 1;// when page constructed page number is 1::: not 0 - it should match visible page number
     }
 
@@ -33,17 +35,17 @@ public class SearchResultPage extends BasePage {
         // removing spaces and converting to lower case
         List<WebElement> listOfProductElements = getProductsListOnCurrentSearchPage();
         List<String> listOfProductTitles = new ArrayList<>();// list of titles(link texts) for each product on Search Page
-        System.out.println("Getting Titles from Elements..");
+        log.info("Getting Titles from Elements..");
         for (WebElement element : listOfProductElements// converting elements list to titles list, if check every product page is not mandatory
             // can refactor to get list of titles straight without getting list of elements;
         ) {
             listOfProductTitles.add(element.getText());
         }
-        System.out.println("Checking if Titles contain text..");
+        log.info("Checking if Titles contain text..");
         for (String text : listOfProductTitles
         ) {
             if (!text.toLowerCase().contains(matchingText)) {
-                System.out.println(text + " :This product title does not contains text: " + matchingText);
+                log.info(text + " :This product title does not contains text: " + matchingText);
                 resultCurrentPage = false;
             }
         }
@@ -51,18 +53,18 @@ public class SearchResultPage extends BasePage {
     }
 
     public List<WebElement> getProductsListOnCurrentSearchPage() {// I need it in case we want to click every element and check each product page
-        System.out.println("Getting Elements from Search Page..");
+        log.info("Getting Elements from Search Page..");
         return driver.findElements(productTitles);
     }
 
     public boolean nextPageSearchResults() {// false if no nextPageButton on the search results page;
-        System.out.println("Trying to load next page..");
+        log.info("Trying to load next page..");
         List<WebElement> list = this.driver.findElements(nextPageButton);// it is list because there are two links "next page"
         if (list.size() > 0) {
             list.get(0).click();
             this.pageNumber++;// adding page number
-            System.out.println("Clicked to the next page! Current Page is: " + this.pageNumber);
-            BasePage.pause(1);
+            log.info("Clicked to the next page! Current Page is: " + this.pageNumber);
+            this.pause(1);
             return true;
         } else {
             return false;
@@ -73,11 +75,11 @@ public class SearchResultPage extends BasePage {
         boolean resultAllPages = true;
 
         do {
-            System.out.println("Checking Search Results, Page: " + pageNumber);
+            log.info("Checking Search Results, Page: " + pageNumber);
             //check results on current page;
             if (!checkProductTitlesOnCurrentSearchPage(matchingText)) {
                 resultAllPages = false;
-                System.out.println("!!!Found Not matching products on page number: " + pageNumber);
+                log.info("!!!Found Not matching products on page number: " + pageNumber);
             }
 
 
@@ -85,24 +87,24 @@ public class SearchResultPage extends BasePage {
         return resultAllPages;
     }
     public void addToCartLastProductOnCurrentPage(){// refactored to click on add to cart on ProductPage
-        System.out.println("Clicking AddToCart button - last element on current page..");
+        log.info("Clicking AddToCart button - last element on current page..");
         List<WebElement> productsAddToCardList = this.driver.findElements(addToCartButton);// getting all "Add to Cart" buttons to the list
         if (productsAddToCardList.size()>0) {// if list not empty - clicking
             productsAddToCardList.get(productsAddToCardList.size()-1).click();// clicking last element in the list
 
-            BasePage.pause(1);
+            this.pause(1);
             addToCartButtonModalDialogClick();// confirm adding to the cart on modal dialog if it is present
 
 
         }
     }
     public ProductPage goLastProductOnCurrentPage(){// clicking to last product on current page link
-        System.out.println("Clicking link title on last element on current page..");
+        log.info("Clicking link title on last element on current page..");
         List<WebElement> productsTitlesList = this.driver.findElements(productTitlesLink);//getting all products titles links to the list
         if (productsTitlesList.size()>0) {// if list not empty - clicking
             productsTitlesList.get(productsTitlesList.size()-1).click();// clicking last element in the list and go to product page
         }
-        return new ProductPage(this.driver);
+        return new ProductPage(this.driver, this.log);
     }
 
     protected void addToCartButtonModalDialogClick(){
