@@ -42,7 +42,7 @@ abstract public class BaseTest {
     }
 
 
-    @BeforeSuite
+    @BeforeClass
     public void setUpSuite(ITestContext iTestContext){
         String testName = iTestContext.getName();
         System.setProperty("log4j.configurationFile","resources/log4j2.xml");// xml best way to configure log4j2.. properties was working good only in 1st version

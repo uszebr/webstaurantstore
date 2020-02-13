@@ -65,21 +65,25 @@ public class TestListener extends BaseTest implements ITestListener {
         // just displaying message from listener
      /*   extentTest = extentReport.createTest(iTestResult.getName());
         extentTest.log(Status.PASS, MarkupHelper.createLabel(iTestResult.getName(), ExtentColor.BLUE));*/// set test status and label color
-        System.out.println("-=- Executed " + iTestResult.getMethod().getMethodName() + " test Success!");
+
+        Object testClass = iTestResult.getInstance();
+         ((BaseTest) testClass).log.info("-=- Executed " + iTestResult.getMethod().getMethodName() + " test Success!");//this is logging to log4j2
+
         ExtentReport.getTest().log(Status.PASS, MarkupHelper.createLabel(iTestResult.getName(), ExtentColor.BLUE));
-        ExtentReport.getTest().log(Status.INFO, "bla-bla1");
+
+        ExtentReport.getTest().log(Status.INFO, "Test Passed");
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        ExtentReport.getTest().fail(iTestResult.getThrowable().getMessage());
-
+      //  ExtentReport.getTest().fail(iTestResult.getThrowable().getMessage());//getting message from Assert errorMessage, this also working, but refactored to
+        ExtentReport.getTest().log(Status.ERROR, iTestResult.getThrowable().getMessage());//getting message from Assert errorMessage
         Object testClass = iTestResult.getInstance();
         String fileNameDest = ((BaseTest) testClass).takeScreenshot(iTestResult);//Where Screenshot stored from BaseTest Class
         String rootPath = System.getProperty("user.dir");// project path
         try {
 
-            ExtentReport.getTest().addScreenCaptureFromPath(rootPath + "/" + fileNameDest);// directory screnshots// <-formating in the BaseTest class
+            ExtentReport.getTest().addScreenCaptureFromPath(rootPath + "/" + fileNameDest);// directory screnshots// <-formating in the BaseTest class//May be refactor to separete folder for each test, with TimeStamp
             ExtentReport.getTest().log(Status.ERROR, "Screenshot in attach.");
         } catch (Exception e) {
 

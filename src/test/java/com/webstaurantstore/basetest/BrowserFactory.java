@@ -41,6 +41,11 @@ import java.util.concurrent.TimeUnit;
                 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
                 driverContainer.set(new ChromeDriver());
                 break;
+            case "firefox":
+                log.info("Setting Up Firefox Browser");
+                System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+                driverContainer.set(new FirefoxDriver());
+                break;
 
             default:
                 log.info("Webdriver not set properly, starting default driver. Unrecognized parameter: " + browser);

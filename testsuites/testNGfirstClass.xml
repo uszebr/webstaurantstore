@@ -1,0 +1,37 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Tampa3"  parallel="tests" thread-count="2" >
+    <listeners>
+        <listener class-name="com.webstaurantstore.basetest.TestListener"></listener>
+    </listeners>
+    <parameter name="environment" value="local"></parameter>
+    <test name="TestOne-SuiteTWO" >
+           <parameter name="browser" value="chrome"></parameter>
+
+
+
+        <classes>
+            <class name="com.webstaurantstore.tests.FirstTestClass">
+                <methods><exclude name="negativeTest"/></methods>
+
+            </class>
+
+
+        </classes>
+    </test>
+    <test name="TestTWo-SuiteTWO" >
+        <parameter name="browser" value="firefox"></parameter>
+
+
+
+        <classes>
+            <class name="com.webstaurantstore.tests.FirstTestClass">
+                <methods><exclude name="positiveTest"/></methods>
+
+            </class>
+
+
+        </classes>
+    </test>
+
+</suite>
